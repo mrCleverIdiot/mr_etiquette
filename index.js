@@ -30,6 +30,8 @@ client.on("ready", () => {
 			// Send messages to each phone number with delay of 2 seconds between each message
 			phoneNumbers.forEach((phoneNumber, index) => {				
 				const message = messages[index];
+				// const message = "Hello,\nThis is a test message with a line break.";
+
 				setTimeout(() => {
 					client.sendMessage(phoneNumber, message);
 					console.log(`Processing number ${index + 1} of ${phoneNumbers.length}: ${phoneNumber}`);
