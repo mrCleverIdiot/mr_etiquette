@@ -19,8 +19,19 @@ Install Whatsapp-Auto-Cannon with npm
   cd Whatsapp-Auto-Cannon
   npm install && npm run start
 ```
-## Usage
+### Usage with `CSV` 
 - Do not forgot to chnage in  `messages.csv`
+### Usage with `Mysql` 
+- change connection string
+- create database `whatsapp_auto_cannon`
+- create table 
+`CREATE TABLE `phone_numbers` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `message` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;`
+- run script `node mysq_index.js`
 
 ## Legal
 > **Warning**
