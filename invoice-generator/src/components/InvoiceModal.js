@@ -8,10 +8,11 @@ import Modal from 'react-bootstrap/Modal';
 import { BiPaperPlane, BiCloudDownload } from "react-icons/bi";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'
-import myImage from './mainLogo.png';
+import mainHeaderLogo from './mainHeaderLogoLight.png';
+import footerLogo from './footerLogo1.jpeg';
 
 
-function GenerateInvoice(billName, invono,mobile,amt) {  
+function GenerateInvoice(billName, invono, mobile, amt) {
   html2canvas(document.querySelector("#invoiceCapture")).then((canvas) => {
     const imgData = canvas.toDataURL('image/png', 1.0);
     const pdf = new jsPDF({
@@ -25,24 +26,24 @@ function GenerateInvoice(billName, invono,mobile,amt) {
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     const pdfName = billName + '_' + invono + '.pdf'
-    pdf.save(pdfName);    
+    pdf.save(pdfName);
     // Call the API to trigger sending the message
     const apiUrl = `http://localhost:9090/send?mobile=${mobile}&pdfName=${pdfName}&billName=${billName}&amt=${amt}`;
-  fetch(apiUrl)
-    .then(response => {
-      if (response.ok) {
-        console.log('Invoice sent successfully');
-        alert('Invoice sent successfully');
-        window.location.reload();
-      } else {
-        console.error('Error sending invoice');
+    fetch(apiUrl)
+      .then(response => {
+        if (response.ok) {
+          console.log('Invoice sent successfully');
+          alert('Invoice sent successfully');
+          window.location.reload();
+        } else {
+          console.error('Error sending invoice');
+          alert('Error sending invoice');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending invoice:', error);
         alert('Error sending invoice');
-      }
-    })
-    .catch(error => {
-      console.error('Error sending invoice:', error);
-      alert('Error sending invoice');
-    });
+      });
   });
 }
 
@@ -52,12 +53,13 @@ class InvoiceModal extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Modal show={this.props.showModal} onHide={this.props.closeModal} size="lg" centered>
+      <div >
+        <Modal  show={this.props.showModal} onHide={this.props.closeModal} size="lg" centered>
           <div id="invoiceCapture">
             <div className="d-flex flex-row justify-content-between align-items-start bg-light w-100 p-4">
               <div className="w-100">
-                <img src={myImage} alt="My Image" style={{ width: '100px', height: 'auto' }} />
+                <img src={mainHeaderLogo} alt="My Image" style={{ width: '150px', height: 'auto', borderRadius: '4%' }} />
+
                 <br />
                 <div className="fw-light text-secondary small my-2">📞 <a href="tel:7284000060">7284000060</a></div>
               </div>
@@ -159,7 +161,14 @@ class InvoiceModal extends React.Component {
                   {this.props.info.notes4 && <br />}
                   {this.props.info.notes4}
                   <div className="text-end ms-4">
-                    <h6 className="fw-bold mt-1 mb-2">Mr Etiqute</h6>
+                    <img
+                      src={footerLogo}
+                      alt="My Image"
+                      style={{
+                        width: '200px',
+                        height: 'auto'
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -178,8 +187,8 @@ class InvoiceModal extends React.Component {
                 <Button
                   variant="outline-primary"
                   className="d-block w-100 mt-3 mt-md-0"
-                  onClick={() => GenerateInvoice(this.props.info.billTo, this.props.info.invoiceNumber,this.props.info.billToEmail,this.props.total)}
-                >                                  
+                  onClick={() => GenerateInvoice(this.props.info.billTo, this.props.info.invoiceNumber, this.props.info.billToEmail, this.props.total)}
+                >
                   <BiCloudDownload style={{ width: '16px', height: '16px', marginTop: '-3px' }} className="me-2" />
                   Download Copy
                 </Button>
