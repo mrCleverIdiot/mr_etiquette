@@ -22,7 +22,7 @@ class InvoiceForm extends React.Component {
       billTo: '',
       billToEmail: '',
       billToAddress: '',
-      billFrom: 'Mr Etiqute',
+      billFrom: 'Mr Etiquette',
       billFromEmail: '',
       billFromAddress: 'G-15, Alekh Complex, Leela Circle, Bhavnagar',
       notes: '- માલ માં કોઈ પણ પ્રકાર ની ગેરંટી આપવામાં આવતી નથી.',
