@@ -24,7 +24,7 @@ class InvoiceForm extends React.Component {
       billToAddress: '',
       billFrom: 'Mr Etiquette',
       billFromEmail: '',
-      billFromAddress: 'G-15, Alekh Complex, Leela Circle, Bhavnagar',
+      billFromAddress: 'Shop 10, Sumeru Arc, Divadi Chawk, Rupani Circle, Bhavnagar -364002',
       notes: '- માલ માં કોઈ પણ પ્રકાર ની ગેરંટી આપવામાં આવતી નથી.',
       notes1: '- બિલ તથા ટેગ વગર માલ બદલી અપમાં આવશે નહીં.',
       notes2: '',
@@ -71,7 +71,7 @@ class InvoiceForm extends React.Component {
   }
   handleCalculateTotal = async () => {
     try {
-      const response = await fetch("http://localhost:9090/getInvoiceNumber");      
+      const response = await fetch("http://localhost:9090/getInvoiceNumber");
       if (!response.ok) {
         // Check for non-OK status (4xx or 5xx)
         alert("There was issue in getting bill id")
