@@ -9,8 +9,9 @@ import { resolve, join } from 'path';
 
 const client = new Client({
     puppeteer: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
     },
+    webCache: false, // Disable web cache
 });
 
 const app = express();
